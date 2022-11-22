@@ -1,0 +1,13 @@
+{
+    "nome": "Thiao",
+    "idade": "30",
+    "esta_trabalhando": false,
+    "detalhe_prof":{
+
+      "profissao": "empresario",
+      "empresa": "open Connect"
+
+    },
+
+    "hobbies": ["Programar","correr", "Assistir series"]
+}
