@@ -1,0 +1,10 @@
+/*Declarando Variável no css*/
+:root
+{
+    --bg-color: #1A7E91;
+}
+
+#checkout-page
+{
+    background-color: var(--bg-color);
+}
