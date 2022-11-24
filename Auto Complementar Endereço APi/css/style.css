@@ -1,10 +1,137 @@
-/*Declarando Variável no css*/
+/*Declarando Variável se equipara à raiz de uma árvore, que por sua vez representa o documento. Aplicado ao HTML, :root representa o elemento <html> e é idêntico ao seletor html, exceto que sua especificidade é mais alta.*/
 :root
 {
-    --bg-color: #1A7E91;
+    --bg-color: #006FFF; /*primeira cor do background*/
+    --secundary-bg-color: #b3b2b2; /*segunda cor do background*/
+    --primary-color: #ffffff; /*cor primaria dos textos*/
+    --secundary-color: #4fe9ab; /*cor segundaria dos textos*/
+    --text-color: #dfdfdf;
+    --borde-color: #20235B; /*cor das bordas*/
+
+
 }
 
+/*nosso body*/
 #checkout-page
 {
     background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+/*message*/
+#fade
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.6); /*deixa apenas o fundo transparente e os elementos que estão*/
+    display: flex;
+    align-items: center; /*alinha ao centro na vertical*/
+    justify-content: center; /*alinha ao centro na horizontal*/
+    z-index: 10; /*fala que ele vai sobrepor qualquer elemento na pagina*/
+}
+
+/*Loading alterando o tamanho*/
+#fade .spinner-border
+{
+    height: 60px;
+    width: 60px;
+}
+
+/*escondendo itens no layout tudo que tiver com HIDE vai ter um display none*/
+.hide
+{
+    display: none !important; /*colocamos o !important para que seja obedecido para que outra coisa não venha sobrescrever*/
+}
+
+/*tamanho da caixa da menssagem*/
+#message
+{
+    width: 40%;
+}
+
+/*dando um padding e borda dentro da caixa de mensagem*/
+.alert.alert-light p
+{
+border-bottom: 1px solid #333;
+padding: 1em 0;
+}
+
+
+/*Steps*/
+
+#orde-form-container
+{
+  padding: 1.5em; /*padding em todas lateral*/
+  max-height: 700px;
+}
+
+/*fazendo os alinhamento na tela dos 3 icones*/
+#steps-bar
+{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--borde-color);
+    position: relative;
+}
+
+/*fazendo os alinhamento interno dentro da div steps-bar*/
+.step
+{
+    display: flex;
+    flex-direction: column; /*alinha o icone com o parágrafo um embaixo do outro*/
+    justify-content: center;
+    align-items: center;
+}
+
+/*estilizando o icone dos steps*/
+.step i
+{
+    background-color: var(--secundary-bg-color); /*cor do fundo do icone*/
+    width: 45px;
+    height: 45px;
+    line-height: 45px; /*alinha a div na vertial*/
+    border-radius: 50%; /*deixa a div redonda*/
+    font-size: 1.2em;
+    text-align: center; /*alinha a div na horizontal*/
+    margin-bottom: .3em; /*afasta o icone do parágrafo P*/
+}
+
+/*no step as div que está com a class active vai mudar a cor do backgroud para fazer o papel que está preenchido os outros passos*/
+.step .active
+{
+    background-color: var(--secundary-color); /*quando a etapa foi preenchida*/
+    color: var(--primary-color); /*muda a cor do icone para branco pra deixar mais acesso*/
+}
+
+.step p
+{
+    color: var(--text-color);
+}
+
+/*linha que liga os icones*/
+.line
+{
+    border-bottom: 3px solid var(--borde-color);
+    position: absolute;
+    top: 25px; /*joga a linha mais pra baixo*/
+    width: 89%; /*define o amanho da linha*/
+    left: 6%; /*joga ela 6% para direira*/
+    z-index: -1; /*faz com que ela fica por baixo dos outros elementos da pagina*/
+}
+
+/*form-header*/
+#form-header p
+{
+    color: var(--text-color);
+}
+
+/*Forms*/
+#orde-form-container input,
+#orde-form-container select
+{
+    background-color: var(--bg-color);
+    border: 2px solid var(--primary-color);
 }

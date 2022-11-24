@@ -13,36 +13,134 @@
     <script src="/js/scripts.js" defer></script> <!--Faz com que o HTML carregue primeiro-->
 </head>
 
+<!--Corpo do documento-->
+
 <body id="checkout-page">
-  <div id="fade" class="hide"> <!--Modal que vai aparecer com algumas info-->
-      <div id="loader" class="spinner-border text-primary" role="status">  <!--Peando a class do bootstrap LEMBRANDO QUE TEM VARIAS CORRES PARA O LOADER-->
-        <span class="visually-hidden">Loading...</span> <!--tem também a sr-only-->
+    <div id="fade" class="hide"> <!--Modal que vai aparecer com algumas info janelinha-->
+           <div id="loader" class="spinner-border text-primary hide" role="status">  <!--Peando a class do bootstrap LEMBRANDO QUE TEM VARIAS CORRES PARA O LOADER-->
+             <span class="visually-hidden">Loading...</span> <!--tem também a sr-only-->
+            </div>
+
+          <div id="message" class="hide">
+         <div class="alert alert-light" role="alert">  <!--class do bootstrap-->
+        <h4>Mensagem:</h4>
+      <p>Texto da mensagem</p> <!--unica coisa que vai ser dinâmica é o texto da menssagem-->
+        <button id="fx-mg" type="button" class="btn btn-secondary">
+         Fechar
+          </button> <!--class do botão do bootstrap-->
+        </div>
+      </div>
     </div>
-  <div id="message" class="hide">
-     <div class="alert alert-ligth" role="alert">  <!--class do bootstrap-->
-       <h4>Menssagem:</h4>
-         <p></p> <!--unica coisa que vai ser dinâmica é o texto da menssagem-->
-      <button id="fx-mg" type="button" class="btn btn-secondary">Fechar</button> <!--class do botão do bootstrap-->
-    </div>
-   </div>
-  </div>
-    
 
+      <!--Formulario-->                       <!--espaçamento de margin bootstrap-->
+  <div id="orde-form-container" class="container px-md-0"> <!--Class bootstrap (p- para classes que definem padding) (x- para classes que definem ambos*-left*-right) -->
+        <div id="steps-bar" class="mb-md-3 pb-md-3 "> <!--espaçamento de margin bootstrap-->
+          <div class="line"></div> <!--Linha que vai interligar os icones-->
 
+               <!--Caixinha com icon e o parágrafo-->
+            <div class="step">
+          <i class="bi bi-person active"></i>
+       <p class="d-none d-md-block">Identificação</p>
+    </div> <!--Fim step-->
 
+            <!--Caixinha com icon e o parágrafo-->
+            <div class="step">
+              <i class="bi bi-geo-alt active"></i>
+           <p class="d-none d-md-block">Endereço</p>
+        </div> <!--Fim step-->
 
+                <!--Caixinha com icon e o parágrafo-->
+                <div class="step">
+                  <i class="bi bi-credit-card"></i>
+               <p class="d-none d-md-block">Pagamento</p>
+            </div> <!--Fim step-->
+   </div> <!--Fim step bar-->  
+   
+                            <div id="form-header">
+                               <h2>Cadastre Seu Endereço</h2>
+                                 <p>Preencha todos os campos para prosseguir</p>
+               </div> <!--Fim form-header-->
+                 <form id="adress-form">
+                   <div class="row mb-3"> <!--Class do bootstrap mb-3 margin-bottom-->
+                      <div class="form-floating"> <!--Class do bootstrap quando clicar na caixa o texto flutua-->
+                      
+                    <input type="text" class="form-control shodow-none" id="cep" name="cep" placeholder="Digite seu CEP" minlength="8" maxlength="8" required/>
+                      <label for="cep">Digite seu CEP</label>
+                      </div> <!--Fim form-floating-->
+                   </div> <!--Fim row-->
 
+                   <div class="row mb-3"> <!--mb-3 é o margin-bottom e quando a ela cair para sm deixa o margin em 0 -->
+                      <div class="form-floating col-12 col-sm-6 mb-3 mb-sm-0">     <!--disabled desabilita o campo rua pq ele vai vim da nossa API-->
+                         <input type="text" class="form-control shodow-none" id="address" name="address" placeholder="Rua" disabled required data-input/>
+                      <label for="address">Rua</label>
+                    </div>
 
+                    <div class="form-floating col-12 col-sm-6">     <!--disabled desabilita o campo rua pq ele vai vim da nossa API-->
+                      <input type="text" class="form-control shodow-none" id="numero" name="numero" placeholder="Digite o número a Residência" disabled required data-input/>
+                   <label for="numero">Digite o número a Residência</label>
+                 </div>
+                   </div> <!--Fim row-->
 
+                   <div class="row mb-3"> <!--mb-3 é o margin-bottom e quando a ela cair para sm deixa o margin em 0 -->
+                    <div class="form-floating col-12 col-sm-6 mb-3 mb-sm-0">     <!--disabled desabilita o campo rua pq ele vai vim da nossa API-->
+                       <input type="text" class="form-control shodow-none" id="complemento" name="complemento" placeholder="Digite o Complemento" disabled data-input/>
+                    <label for="complemento">Digite o Complemento</label>
+                  </div>
 
+                  <div class="form-floating col-12 col-sm-6">     <!--disabled desabilita o campo rua pq ele vai vim da nossa API-->
+                    <input type="text" class="form-control shodow-none" id="bairro" name="bairro" placeholder="Bairro" disabled required data-input/>
+                 <label for="bairro">Bairro</label>
+               </div>
+              </div> <!--Fim row-->
 
+              <div class="row mb-3"> <!--mb-3 é o margin-bottom e quando a ela cair para sm deixa o margin em 0 -->
+                <div class="form-floating col-12 col-sm-6 mb-3 mb-sm-0">     <!--disabled desabilita o campo rua pq ele vai vim da nossa API-->
+                   <input type="text" class="form-control shodow-none" id="cidade" name="cidade" placeholder="Cidade" disabled required data-input/>
+                <label for="cidade">Cidade</label>
+              </div>
 
+              <div class="form-floating col-12 col-sm-6">     
+              <select 
+                  name="regiao" 
+                  id="regiao"
+                  class="from-select shodow-none"
+                  disabled
+                  required 
+                  data-input>
 
+              <option selected>Estado</option>
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AP">Amapá</option>
+              <option value="AM">Amazonas</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PR">Paraná</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SP">São Paulo</option>
+              <option value="SE">Sergipe</option>
+              <option value="TO">Tocantins</option>
+            </select>
+           </div>
+          </div> <!--Fim row-->
+                 </form>
 
-
-
-
-
-    
-</body>
+    </div> <!--Fim form--> 
+  </body>
 </html>
