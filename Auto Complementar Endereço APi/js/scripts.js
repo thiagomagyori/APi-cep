@@ -17,12 +17,21 @@ const regiaoInput = document.querySelector("#regiao");
 const formInput = document.querySelectorAll("[data-input]");
 /*selecionando todo input com data-input de uma só vez para fazer uma aleração em massa*/
 
-/*selecionando o botão de close*/
-const btInput = document.querySelectorAll("#av-bt");
+const fadeElement = document.querySelector("#fade");             //aqui chama pra tela o fundo do loader e o loader
+
+/*selecionando o botão de close janela modal*/
+const closeBt = document.querySelector("#fx-mg");
+
+//======================= FIM SELEÇÃO DE ELEMENOS ========================================================================
 
 
+
+
+
+
+
+//=========================================== FUNÇÕES ====================================================================
 //validação do campo CEP
-// Validate CEP Input
 //usei o keypress para pear o codigo de qualquer coisa digitado pelo teclado
 cepInput.addEventListener("keypress", (e) => {
     const onlyNumbers = /[0-9]/;                                         //console.log(e.keyCode); console.log(key); usei o console log para testar
@@ -57,7 +66,7 @@ cepInput.addEventListener("keyup", (e) =>{
 
 // 2- função fazer a requisição na API via cep 
 
-const getAddress = async (cep) =>{
+const getAddress = async (cep) => {
 
     toggleLoader();   //chama a função toggleLoader
 
@@ -68,25 +77,63 @@ const getAddress = async (cep) =>{
           const response = await fetch(apiUrl); //pegando a resposta da API 
           const data = await response.json();
           
-        //checando por CEP Invalidos e resetando o formulario
-       if (data.error === "true");
-       {
-        addressForm.reset();
-        toggleLoader();
-        return;
-       }
 
+//checando por CEP Invalidos e resetando o formulario
+if (data.erro == true) 
+
+//só vai executar o SE quando o CEP for invalido caso contrario já vai preencher os campos
+{
+ addressForm.reset();
+ toggleLoader(); //chama a função loader
+ toggleMessage("CEP inválido tente novamente!"); //chama a função para caixa de mensagem
+ return;
 };
 
+//preenchendo os campos com os dados vindo da API
+addressInput.value = data.logradouro;   
+cidadeInput.value = data.localidade;
+bairroIput.value = data.bairro;
+regiaoInput.value = data.uf;
+
+
+toggleLoader();    
+     
+};
 
 
 //Função pra chamar o Loader na tela 
 
 const toggleLoader = () => {
 
-    const fadeElement = document.querySelector("#fade");             //aqui chama pra tela o fundo do loader e o loader
+    
     const loaderElement = document.querySelector("#loader");
 
       fadeElement.classList.toggle("hide");
       loaderElement.classList.toggle("hide");  //aqui que é legal o toggle faz a magica acontecer SE ELE ESTIVER SENDO EXIBIDO ELE ESCONDE SE ELE ESTIVER OCULTO ELE MOSTRA
-};                                              //TOGGLE FAZ COMO SE FOSSE O INVERSO 
+                                             //TOGGLE FAZ COMO SE FOSSE O INVERSO 
+
+};
+
+
+// Show or hide message
+const toggleMessage = (msg) => {
+    const fadeElement = document.querySelector("#fade");
+    const messageElement = document.querySelector("#message");
+  
+    const messageTextElement = document.querySelector("#message p");
+  
+    messageTextElement.innerText = msg;
+  
+    fadeElement.classList.toggle("hide");
+    messageElement.classList.toggle("hide");
+  };
+
+
+
+
+
+  //==================================== EVENTOS ======================================================================
+
+  //Fechar janela modal
+closeBt.addEventListener("click", () => toggleMessage()); //como o modal vai está aberto ele vai dar o toggle ai libera pra fechar
+  
