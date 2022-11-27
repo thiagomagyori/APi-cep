@@ -21,7 +21,6 @@ const fadeElement = document.querySelector("#fade");             //aqui chama pr
 
 /*selecionando o botão de close janela modal*/
 const closeBt = document.querySelector("#fx-mg");
-
 //======================= FIM SELEÇÃO DE ELEMENOS ========================================================================
 
 
@@ -79,15 +78,25 @@ const getAddress = async (cep) => {
           
 
 //checando por CEP Invalidos e resetando o formulario
-if (data.erro == true) 
-
 //só vai executar o SE quando o CEP for invalido caso contrario já vai preencher os campos
+if (data.erro === true) 
 {
+
+    if(!addressInput.hasAttribute("disabled"))
+    {
+       toggleDisabled(); //chama a função
+    }
+
  addressForm.reset();
  toggleLoader(); //chama a função loader
  toggleMessage("CEP inválido tente novamente!"); //chama a função para caixa de mensagem
  return;
-};
+}
+
+if (addressInput.value == "")
+{
+    toggleDisabled(); //validação simples para quando os inputs for desabilitado pela primeira vez e se caso o usúario muda o cep ele não bloqueia os inputs novamente
+}
 
 //preenchendo os campos com os dados vindo da API
 addressInput.value = data.logradouro;   
@@ -100,7 +109,18 @@ toggleLoader();
      
 };
 
-
+//Função para habilitar os inputs
+const toggleDisabled = () => {
+    if (regiaoInput.hasAttribute("disabled")) {
+        formInput.forEach((input) => {
+        input.removeAttribute("disabled");
+        });                                                          
+    } else {
+        formInput.forEach((input) => {
+            input.setAttribute("disabled", "disabled");
+        });
+    }
+};
 //Função pra chamar o Loader na tela 
 
 const toggleLoader = () => {
@@ -137,3 +157,21 @@ const toggleMessage = (msg) => {
   //Fechar janela modal
 closeBt.addEventListener("click", () => toggleMessage()); //como o modal vai está aberto ele vai dar o toggle ai libera pra fechar
   
+//Salvar endereço e posteriormente mandar para uma pagina de pagamento ou algo do tipo
+addressForm.addEventListener("submit", (e) => {
+    e.preventDefault(); //aqui faz com que ele não carregue uma nova página nova url
+
+    toggleLoader(); //habilita o loader
+
+    setTimeout(() => {
+
+        toggleLoader(); //desativa o loader
+
+        toggleMessage("Endereço Salvo Com Sucesso!"); //chama a função da mensagem
+
+        addressForm.reset(); //reseta o formulario
+
+        toggleDisabled(); //desabilita os inputs
+
+    }, 1500); //tempo que o loader fica na tela para dar a impressão que está salvando algo no sistema
+});

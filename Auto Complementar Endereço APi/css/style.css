@@ -1,12 +1,12 @@
 /*Declarando Variável se equipara à raiz de uma árvore, que por sua vez representa o documento. Aplicado ao HTML, :root representa o elemento <html> e é idêntico ao seletor html, exceto que sua especificidade é mais alta.*/
 :root
 {
-    --bg-color: #006FFF; /*primeira cor do background*/
+    --bg-color: #687b81; /*primeira cor do background*/
     --secundary-bg-color: #b3b2b2; /*segunda cor do background*/
     --primary-color: #ffffff; /*cor primaria dos textos*/
     --secundary-color: #4fe9ab; /*cor segundaria dos textos*/
     --text-color: #dfdfdf;
-    --borde-color: #20235B; /*cor das bordas*/
+    --borde-color: #d0dde7; /*cor das bordas*/
     --disabled-input: rgba(233, 233, 233, 0.199);
 
 
@@ -115,11 +115,11 @@ padding: 1em 0;
 /*linha que liga os icones*/
 .line
 {
-    border-bottom: 3px solid var(--borde-color);
+    border-bottom: 6px solid var(--borde-color);
     position: absolute;
     top: 25px; /*joga a linha mais pra baixo*/
-    width: 89%; /*define o amanho da linha*/
-    left: 6%; /*joga ela 6% para direira*/
+    width: 90%; /*define o amanho da linha*/
+    left: 5.5%; /*joga ela 6% para direira*/
     z-index: -1; /*faz com que ela fica por baixo dos outros elementos da pagina*/
 }
 
